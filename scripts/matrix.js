@@ -15,8 +15,7 @@ class Matrix {
     set values(v) {
         var i, j, idx;
         // v is already a 2d array with dims equal to rows and columns
-        if (v instanceof Array && v.length === this.rows && 
-            v[0] instanceof Array && v[0].length === this.columns) {
+        if (v instanceof Array && v.length === this.rows && v[0] instanceof Array && v[0].length === this.columns) {
             this.data = v;
         }
         // not valid
@@ -32,13 +31,26 @@ class Matrix {
     // matrix multiplication (this * rhs)
     mult(rhs) {
         var result = null;
+		console.log("Does this work");
         // ensure multiplication is valid
         if (rhs instanceof Matrix && this.columns === rhs.rows) {
             // implement matrix multiplication here!
+			result = new Matrix(this.rows, rhs.columns);
+			for(var r = 0; r < this.rows; r++){
+				for(var c = 0; c < rhs.columns; c++){
+					for(var i = 0; i < this.columns; i++){
+						result.data[r][c] += this.data[r][i] * rhs.data[i][c];
+						
+					}
+				}
+			}
+			
+			
         }
         else {
             console.log("could not multiply - row/column mismatch");
         }
+		//result = 33;
         return result;
     }
 }
